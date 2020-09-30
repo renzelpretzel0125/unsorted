@@ -1,64 +1,51 @@
 import java.util.Arrays;
 public class notSort{
 
-    public static int[]minDeletionSize(String [] A){//if string needed sorting, delete , and record how much much were not sorted
-        int[]mds = new int[A[0].length()];
-        char[]temp = new char[A.length];
-        int i=0;
-        int j=0;
-        int x = 0;
-        int y = 0;
-        for(int z = 1; z<A.length;z++){//if length of strings are different, then return -1
-          if(A[z].length()!=A[z-1].length()){
-            mds[0]=-1;
-            return mds;
+    public static int[]minDeletionSize(String [] wordList){//if string needed sorting, delete , and record how much much were not sorted
+        int[]col=new int[wordList.length];
+        int[]check=new int[1];
+        for(int z = 1; z<wordList.length;z++){//if length of strings are different, then return -1
+          if(wordList[z].length()!=wordList[z-1].length()){
+            check[0]=-1;
+            return check;
           }
         }
-        if(A[0].length()>1){//if theres only one character for each string, different while loops to work for both
-          while(j<=A.length-1){//if there is more than one char
-              temp[i]= A[i].charAt(j);
-              i+=1;
-              if(i==(A.length)){
-                  for(int n = 1; n<=temp.length-1;n++){
-                    if(Character.compare(temp[n-1],temp[n])>0){//compares if in alphabetical order and will return the index of which is unsorted
-                      x+=1;
-                      if(x==temp.length){
-                        int non = 0;
-                      }else{
-                        mds[j]=j;
-                        x=0; 
-                      }
-                    }
-                  }
-                  j+=1;
-                  i=0;
+        for(int i=0; i<wordList.length;i++){//goes through each item in 2D array through columns
+          for(int j = 0; j<wordList.length-1; j++){
+            if(wordList[i].length()==1){//if are arrays are singular characters
+              if(wordList[i].charAt(0)>wordList[i+1].charAt(0)){
+                check[0]=1;
+                return check;
               }
+              else{
+                return check;
+              }
+            }
+            if(wordList[j].charAt(i)>wordList[j+1].charAt(i)){
+              col[i]=j+1;
+              break;
+            }
           }
-        }else{
-          while(j<A.length-1){//if there is one char for each string
-              temp[i]= A[i].charAt(j);
-              i+=1;
-              if(i==(A.length)){
-                  for(int n = 1; n<=temp.length-1;n++){
-                    if(Character.compare(temp[n-1],temp[n])>0){
-                      x+=1;
-                      if(x==temp.length){
-                        int non = 0;
-                      }else{
-                        mds[j]=j; 
-                        x=0;
-                      }
-                    }
-                  }
-                  j+=1;
-                  i=0;
-              }
-        	}
         }
-        return mds;
+        int count=0;
+        for(int k=0;k<col.length;k++){//creates space for unSorted array that list index on unsorted columns
+          if(col[k]>0){
+            count++;
+          }
+        }
+        int[]unSorted=new int[count];//puts which index of the column that is not sorted into unSorted array
+        int m=0;
+          for(int n=0;n<col.length;n++){
+            if(col[n]>0){
+              unSorted[m]=n;
+              m++;
+            }
+          }
+          return unSorted;
+
     }
     public static void main(String[]args){
-        String[]wordList = {"cba","dai","ghf"};
+        String[]wordList = {"zyx","wvu","tsr"};
         int[]newList=minDeletionSize(wordList);
         System.out.println(Arrays.toString(newList));
     }

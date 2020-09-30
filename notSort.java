@@ -2,7 +2,7 @@ import java.util.Arrays;
 public class notSort{
 
     public static int[]minDeletionSize(String [] wordList){//if string needed sorting, delete , and record how much much were not sorted
-        int[]col=new int[wordList.length];
+        int[]col=new int[wordList[0].length()];
         int[]check=new int[1];
         for(int z = 1; z<wordList.length;z++){//if length of strings are different, then return -1
           if(wordList[z].length()!=wordList[z-1].length()){
@@ -12,13 +12,14 @@ public class notSort{
         }
         for(int i=0; i<wordList.length;i++){//goes through each item in 2D array through columns
           for(int j = 0; j<wordList.length-1; j++){
-            if(wordList[i].length()==1){//if are arrays are singular characters
-              if(wordList[i].charAt(0)>wordList[i+1].charAt(0)){
-                check[0]=1;
+            if(wordList[0].length()==1){//if arrays are singular characters
+              if(wordList[0].charAt(0)>wordList[1].charAt(0)){
+                check[0]=0;
                 return check;
               }
               else{
-                return check;
+                int [] p = new int[0];
+                return p;//returns [] if first character is greater
               }
             }
             if(wordList[j].charAt(i)>wordList[j+1].charAt(i)){
@@ -45,7 +46,7 @@ public class notSort{
 
     }
     public static void main(String[]args){
-        String[]wordList = {"zyx","wvu","tsr"};
+        String[]wordList = {"abcdef","uvwxyz"};
         int[]newList=minDeletionSize(wordList);
         System.out.println(Arrays.toString(newList));
     }

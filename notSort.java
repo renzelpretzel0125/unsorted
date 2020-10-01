@@ -45,7 +45,7 @@ public class notSort{
 
     }
     public static void main(String[]args){
-        String[]wordList = {"b","a"};
+        String[]wordList = {"cba","daf","ghi"};
         int[]newList=minDeletionSize(wordList);
         System.out.println(Arrays.toString(newList));
     }

@@ -10,8 +10,8 @@ public class notSort{
             return check;
           }
         }
-        for(int i=0; i<wordList.length;i++){//goes through each item in 2D array through columns
-          for(int j = 0; j<wordList.length-1; j++){
+        for(int i=0; i<wordList.length-1;i++){//goes through each item in 2D array through columns
+          for(int j = 0; j<wordList[i].length(); j++){
             if(wordList[0].length()==1){//if arrays are singular characters
               if(wordList[0].charAt(0)>wordList[1].charAt(0)){
                 check[0]=0;
@@ -22,9 +22,8 @@ public class notSort{
                 return p;//returns [] if first character is greater
               }
             }
-            if(wordList[j].charAt(i)>wordList[j+1].charAt(i)){
-              col[i]=j+1;
-              break;
+            if(wordList[i].charAt(j)>wordList[i+1].charAt(j)){//compares characters if it unsorted
+              col[j]=j+1;
             }
           }
         }
@@ -46,7 +45,7 @@ public class notSort{
 
     }
     public static void main(String[]args){
-        String[]wordList = {"abcdef","uvwxyz"};
+        String[]wordList = {"b","a"};
         int[]newList=minDeletionSize(wordList);
         System.out.println(Arrays.toString(newList));
     }
